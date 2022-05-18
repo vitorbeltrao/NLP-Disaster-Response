@@ -1,14 +1,28 @@
-# Disaster Response Pipeline Project
+# NLP - Disaster Response Pipeline Project
 
-### Instructions:
-1. Run the following commands in the project's root directory to set up your database and model.
+## Table of Contents
 
-    - To run ETL pipeline that cleans data and stores in database
-        `python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db`
-    - To run ML pipeline that trains classifier and saves
-        `python models/train_classifier.py data/DisasterResponse.db models/classifier.pkl`
+1. [Installation](#installation)
+2. [Project Motivation](#motivation)
+3. [File Descriptions](#files)
+4. [Results](#results)
 
-2. Run the following command in the app's directory to run your web app.
-    `python run.py`
+## Installation <a name="installation"></a>
 
-3. Go to http://0.0.0.0:3001/
+There should be no necessary libraries to run the code here beyond the Anaconda distribution of Python.  The code should run with no issues using Python versions 3.*.
+
+## Project Motivation<a name="motivation"></a>
+
+For this project, we're interested in using a text dataset about disasters and predicting what type of disaster this is, so we can help by sending groceries.
+
+The main idea of this prediction model is to help as many people as possible by sending that help directed by our model.
+
+## File Descriptions <a name="files"></a>
+
+There are 2 python files that do the entire pipeline from ETL to final machine learning model.
+
+We also have a python file that makes the entire web application so that the machine learning model created can actually be used in practice.
+
+## Results<a name="results"></a>
+
+The final web application for this job is available at the following link:

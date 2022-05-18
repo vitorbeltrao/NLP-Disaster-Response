@@ -49,24 +49,26 @@ def clean_data(df):
     return df
 
 # 3. Load
-def save_data(df, database_filename):
+def save_data(df, database_filename, table_name):
     ''' Function that save the final cleaned dataframe that came from the previous function - clean_data()
     and save in a SQL database
 
     :param df: final cleaned dataframe that came from the previous function
-    :param database_filename: the name of your file that you need to upload in the database
+    :param database_filename: the name of your database
+    :param table_name: the name of your table in database
     :return: none
     '''
 
     # upload the final dataframe into a SQL database
-    engine = create_engine('sqlite:///DisasterResponse.db')
-    df.to_sql(database_filename, engine, index=False)
+    engine = create_engine('sqlite:///'+database_filename)
+    df.to_sql(table_name, engine, index=False, if_exists = 'replace')
 
 
 def main():
     if len(sys.argv) == 4:
 
         messages_filepath, categories_filepath, database_filepath = sys.argv[1:]
+        table_name = 'labeledmessages'
 
         print('Loading data...\n    MESSAGES: {}\n    CATEGORIES: {}'
               .format(messages_filepath, categories_filepath))
@@ -76,7 +78,7 @@ def main():
         df = clean_data(df)
         
         print('Saving data...\n    DATABASE: {}'.format(database_filepath))
-        save_data(df, database_filepath)
+        save_data(df, database_filepath, table_name)
         
         print('Cleaned data saved to database!')
     
