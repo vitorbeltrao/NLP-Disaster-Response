@@ -1,24 +1,16 @@
 import sys
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 import re
 import string
 from sqlalchemy import create_engine
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.multioutput import MultiOutputClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from lightgbm import LGBMClassifier
-from sklearn.linear_model import SGDClassifier
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import AdaBoostClassifier
 from sklearn.metrics import accuracy_score, f1_score, confusion_matrix, classification_report
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import GridSearchCV
@@ -53,7 +45,8 @@ def load_data(database_filepath):
     # 3. divide train_set in X/y
     X = df['message']
     Y = df.drop(['id', 'message', 'original', 'genre'], axis=1)
-    return X, Y
+    category_names = Y.columns.values
+    return X, Y, category_names
 
 def tokenize(text):
     '''Function that cleans, tokenizes, and lemmatizes our text dataset so that it is
@@ -89,16 +82,54 @@ def tokenize(text):
 
 
 def build_model():
-    pass
+    '''Function that creates the pipeline to make the necessary transformations and test the
+     hyperparameters with GridSearch to find the optimal combination.
 
+    :return: the search result
+    '''
+    pipeline = Pipeline([
+        ('tfidf', TfidfVectorizer(tokenizer=tokenize)),
+        ('clf', MultiOutputClassifier(LGBMClassifier())),
+    ])
+
+    parameters = {
+        'clf__estimator__n_estimators': [10, 50, 100],
+        'clf__estimator__num_leaves': [10, 31, 50],
+        'clf__estimator__max_depth': [-1, 10, 50]
+    }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters, scoring='f1_macro')
+    return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+    '''Function that makes the model predictions and evaluates with the classification report and ROC.
+
+    :param model: trained model
+    :param X_test: test dataset (messages)
+    :param Y_test: test dataset (labels)
+    :param category_names: target columns category name
+    :return: none
+    '''
+    # make predictions with test data
+    final_predictions = model.predict(X_test)
+
+    # print classification report
+    print(classification_report(Y_test, final_predictions, target_names=category_names))
+
+    # print ROC
+    print("AUC: {:.4f}\n".format(roc_auc_score(Y_test, final_predictions)))
 
 
 def save_model(model, model_filepath):
-    pass
+    '''Function that saves our machine learning model.
 
+    :param model: trained model with the best estimators
+    :param model_filepath: name of the file that the model will have (lgbm_model.pkl)
+    :return: saved model file
+    '''
+    # save LGBM model
+    lgbm_model = joblib.dump(model, model_filepath)
+    return lgbm_model
 
 def main():
     if len(sys.argv) == 3:
