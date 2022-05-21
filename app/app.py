@@ -2,11 +2,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
-import string
 import joblib
 import streamlit as st
-import plotly.express as px
 from sqlalchemy import create_engine
 import re
 import string
@@ -86,7 +83,6 @@ def main():
     inputs = [text_message]
 
     # 6. Making and printing our prediction
-
     predict_button = st.button('See message categories')
 
     if predict_button:
@@ -97,7 +93,7 @@ def main():
         # dict iterate that shows only true categories
         for k, v in updated_res.items():
             if v == 1:
-                st.success('Result: {}'.format(k))
+                st.success('{}'.format(k))
 
 # 7. Calling main method
 if __name__ == '__main__':
@@ -110,3 +106,33 @@ df_filtered = df.drop(columns = ['id', 'message', 'original', 'genre'])
 categories = (df_filtered.columns)
 df_filtered['sum'] = df_filtered.sum(axis=1)
 
+# Sidebar Configuration
+st.sidebar.header("Select one of the labels to see its respective frequency graph:")
+
+# Select box
+labels = st.sidebar.selectbox(
+    'Select Label:',
+    ('related', 'request', 'offer', 'aid_related', 'medical_help',
+     'medical_products', 'search_and_rescue', 'security', 'military',
+      'water', 'food', 'shelter', 'clothing', 'money', 'missing_people',
+      'refugees', 'death', 'other_aid', 'infrastructure_related',
+      'transport', 'buildings', 'electricity', 'tools', 'hospitals',
+      'shops', 'aid_centers', 'other_infrastructure', 'weather_related',
+      'floods', 'storm', 'fire', 'earthquake', 'cold', 'other_weather',
+      'direct_report'))
+
+# Show dataframe
+agree = st.sidebar.checkbox('Select the checkbox if you want to see the entire dataset')
+if agree:
+    st.dataframe(data=df, width=None, height=None)
+
+# Plot the graphs
+fig, ax = plt.subplots()
+sns.countplot(labels, data=df_filtered, ax=ax)
+ax.set_title(labels + ' Variable Distribution')
+st.pyplot(fig)
+
+# Text to help understand the chart
+st.text('The x axis has categories "1" and "0"')
+st.text('Category 1 represents whether an instance is linked to that label')
+st.text('Category 0 represents whether an instance is not linked to that label')
