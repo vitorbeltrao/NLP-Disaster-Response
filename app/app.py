@@ -67,7 +67,7 @@ st.set_page_config(page_title='Disaster Response', page_icon=None, layout="cente
                    initial_sidebar_state="auto", menu_items=None)
 
 # 2. Import saved model from 'train_classifier.py'
-model = joblib.load(open("lgbm_model.pkl", "rb"))
+model = joblib.load(open("./lgbm_model.pkl", "rb"))
 
 
 def main():
