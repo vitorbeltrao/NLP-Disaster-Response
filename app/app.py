@@ -49,7 +49,7 @@ def tokenize(text):
     return clean_tokens
 
 # Load data
-engine = create_engine('sqlite:///../data/disastersresponse.db')
+engine = create_engine('sqlite:///disastersresponse.db')
 df = pd.read_sql_table("labeledmessages", engine)
 
 # Small pre-processes before starting
