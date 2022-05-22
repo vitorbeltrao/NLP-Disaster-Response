@@ -5,7 +5,6 @@ import seaborn as sns
 import joblib
 import streamlit as st
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 import re
 import string
 
@@ -52,9 +51,7 @@ def tokenize(text):
 
 
 # Load data
-Base = declarative_base()
-engine = create_engine('sqlite:///disastersresponse.db')
-df = pd.read_sql_table("labeledmessages", engine)
+df = pd.read_sql_table('labeledmessages', 'sqlite:///disastersresponse.db')
 
 # Small pre-processes before starting
 # 1. passes label values '2' to '0' in target variable 'related'
