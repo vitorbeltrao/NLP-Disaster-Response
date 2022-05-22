@@ -1,7 +1,6 @@
 # NLP - Disaster Response Pipeline Project
 
-![Disaster Response · Streamlit - Google Chrome 22_05_2022 16_02_58](https://user-images.githubusercontent.com/78309658/169711595-18874f64-8d23-408c-9a73-e10bdf987282.png)
-
+![disaster_response_app](https://user-images.githubusercontent.com/78309658/169712031-42396e54-e899-4672-bda7-eae286963927.png)
 
 ## Table of Contents
 
