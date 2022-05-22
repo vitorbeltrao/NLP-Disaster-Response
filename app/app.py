@@ -5,6 +5,7 @@ import seaborn as sns
 import joblib
 import streamlit as st
 from sqlalchemy import create_engine
+from sqlalchemy.orm import declarative_base
 import re
 import string
 
@@ -51,7 +52,9 @@ def tokenize(text):
 
 
 # Load data
+Base = declarative_base()
 engine = create_engine('sqlite:///disastersresponse.db')
+Base.metadata.create_all(engine)
 df = pd.read_sql_query("SELECT * FROM labeledmessages", con=engine)
 
 # Small pre-processes before starting
@@ -139,3 +142,5 @@ st.pyplot(fig)
 st.text('The x axis has categories "1" and "0"')
 st.text('Category 1 represents whether an instance is linked to that label')
 st.text('Category 0 represents whether an instance is not linked to that label')
+
+
