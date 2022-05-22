@@ -4,10 +4,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import joblib
 import streamlit as st
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
 import re
 import string
 
@@ -54,8 +50,7 @@ def tokenize(text):
 
 
 # Load data
-engine = create_engine('sqlite:///disastersresponse.db', pool_pre_ping=True)
-df = pd.read_sql_table("labeledmessages", engine)
+df = pd.read_csv('labeledmessages.csv')
 
 # Small pre-processes before starting
 # 1. passes label values '2' to '0' in target variable 'related'
