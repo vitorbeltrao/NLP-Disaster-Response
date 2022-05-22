@@ -3,4 +3,3 @@ pros_cons
 reuters
 punkt
 stopwords
-omw-1.4
