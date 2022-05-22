@@ -16,7 +16,7 @@ There should be no necessary libraries to run the code here beyond the Anaconda 
 
 ## Project Motivation<a name="motivation"></a>
 
-For this project, we're interested in using a text dataset about disasters and predicting what type of disaster this is, so we can help by sending groceries.
+For this project, we're interested in using a text dataset about disasters and predicting what type of disaster this is, so we can help by sending groceries or other kind of help
 
 The main idea of this prediction model is to help as many people as possible by sending that help directed by our model.
 
