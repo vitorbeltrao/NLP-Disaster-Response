@@ -50,7 +50,7 @@ def tokenize(text):
 
 
 # Load data
-df = pd.read_csv('labeledmessages.csv')
+df = pd.read_csv('./labeledmessages.csv', low_memory=False)
 
 # Small pre-processes before starting
 # 1. passes label values '2' to '0' in target variable 'related'
