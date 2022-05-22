@@ -7,6 +7,7 @@ import joblib
 import pickle
 import re
 import string
+import os
 
 import nltk
 nltk.download('punkt')
@@ -66,8 +67,9 @@ st.set_page_config(page_title='Disaster Response', page_icon=None, layout="cente
                    initial_sidebar_state="auto", menu_items=None)
 
 # 2. Import saved model from 'train_classifier.py'
-model = joblib.load(open("../models/lgbm_model.pkl", "rb"))
-
+#model = joblib.load(open("../models/lgbm_model.pkl", "rb"))
+fullpath = os.path.join("../models", 'lgbm_model.pkl')
+model = joblib.load(fullpath)
 
 def main():
     # 3. Web app title configuration and the firsts paragraphs to explain the app
