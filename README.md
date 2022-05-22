@@ -1,12 +1,14 @@
 # NLP - Disaster Response Pipeline Project
 
+
+
 ## Table of Contents
 
 1. [Installation](#installation)
 2. [Project Motivation](#motivation)
 3. [File Descriptions](#files)
 4. [Results](#results)
-5. [Licensing and Authors](#licensing and authors)
+5. [Licensing and Authors](#licensingandauthors)
 
 ## Installation <a name="installation"></a>
 
@@ -28,8 +30,8 @@ We also have a python file that makes the entire web application so that the mac
 
 The final web application for this job is available at the following link: https://share.streamlit.io/vitorbeltrao/nlp-disaster-response/app.py
 
-## Licensing and Authors <a name="licensing and authors"></a>
+## Licensing and Authors <a name="licensingandauthors"></a>
 
-Licensing: [MIT license]
+Licensing: [MIT license](https://github.com/vitorbeltrao/NLP-Disaster-Response/blob/master/license.txt)
 
 Authors: [Vitor Beltrão](https://www.linkedin.com/in/v%C3%ADtor-beltr%C3%A3o-56a912178/)
