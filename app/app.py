@@ -5,11 +5,11 @@ import seaborn as sns
 import joblib
 import streamlit as st
 from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
 import re
 import string
 
 import nltk
-
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -52,7 +52,8 @@ def tokenize(text):
 
 
 # Load data
-engine = create_engine('sqlite:///../data/disastersresponse.db')
+Base = declarative_base()
+engine = create_engine('sqlite:///disastersresponse.db')
 df = pd.read_sql_table("labeledmessages", engine)
 
 # Small pre-processes before starting
