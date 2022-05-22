@@ -2,8 +2,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import joblib
 import streamlit as st
+import joblib
 import re
 import string
 
@@ -65,7 +65,7 @@ st.set_page_config(page_title='Disaster Response', page_icon=None, layout="cente
                    initial_sidebar_state="auto", menu_items=None)
 
 # 2. Import saved model from 'train_classifier.py'
-model = joblib.load('lgbm_model.pkl')
+model = joblib.load(open('lgbm_model.pkl','rb'))
 
 
 def main():
