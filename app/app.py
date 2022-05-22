@@ -54,12 +54,8 @@ def tokenize(text):
 
 
 # Load data
-engine = create_engine('sqlite:///disastersresponse.db', poolclass=StaticPool, connect_args={'check_same_thread': False})
-Base = declarative_base()
-Base.metadata.create_all(engine)
-Session = sessionmaker(bind=engine)
-session = Session()
-df = pd.read_sql_query("SELECT * FROM labeledmessages", con=engine)
+engine = create_engine('sqlite:///disastersresponse.db', pool_pre_ping=True)
+df = pd.read_sql_table("labeledmessages", engine)
 
 # Small pre-processes before starting
 # 1. passes label values '2' to '0' in target variable 'related'
