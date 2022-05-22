@@ -4,10 +4,8 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 import joblib
-import pickle
 import re
 import string
-import os
 
 import nltk
 nltk.download('punkt')
