@@ -51,7 +51,8 @@ def tokenize(text):
 
 
 # Load data
-df = pd.read_sql_table('labeledmessages', 'sqlite:///disastersresponse.db')
+engine = create_engine('sqlite:///disastersresponse.db')
+df = pd.read_sql_query("SELECT * FROM labeledmessages", con=engine)
 
 # Small pre-processes before starting
 # 1. passes label values '2' to '0' in target variable 'related'
