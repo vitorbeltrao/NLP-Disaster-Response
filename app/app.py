@@ -9,12 +9,14 @@ import re
 import string
 
 import nltk
+
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+
 
 def tokenize(text):
     '''Function that cleans, tokenizes, and lemmatizes our text dataset so that it is
@@ -48,8 +50,9 @@ def tokenize(text):
 
     return clean_tokens
 
+
 # Load data
-engine = create_engine('sqlite:///disastersresponse.db')
+engine = create_engine('sqlite:///../data/disastersresponse.db')
 df = pd.read_sql_table("labeledmessages", engine)
 
 # Small pre-processes before starting
@@ -64,9 +67,9 @@ df.drop(['child_alone'], axis=1, inplace=True)
 st.set_page_config(page_title='Disaster Response', page_icon=None, layout="centered",
                    initial_sidebar_state="auto", menu_items=None)
 
-
 # 2. Import saved model from 'train_classifier.py'
 model = joblib.load('../models/lgbm_model.pkl')
+
 
 def main():
     # 3. Web app title configuration and the firsts paragraphs to explain the app
@@ -95,6 +98,7 @@ def main():
             if v == 1:
                 st.success('{}'.format(k))
 
+
 # 7. Calling main method
 if __name__ == '__main__':
     main()
@@ -102,7 +106,7 @@ if __name__ == '__main__':
 # 8. Making informative graphs
 st.title("Data Exploration")
 
-df_filtered = df.drop(columns = ['id', 'message', 'original', 'genre'])
+df_filtered = df.drop(columns=['id', 'message', 'original', 'genre'])
 categories = (df_filtered.columns)
 df_filtered['sum'] = df_filtered.sum(axis=1)
 
@@ -114,12 +118,12 @@ labels = st.sidebar.selectbox(
     'Select Label:',
     ('related', 'request', 'offer', 'aid_related', 'medical_help',
      'medical_products', 'search_and_rescue', 'security', 'military',
-      'water', 'food', 'shelter', 'clothing', 'money', 'missing_people',
-      'refugees', 'death', 'other_aid', 'infrastructure_related',
-      'transport', 'buildings', 'electricity', 'tools', 'hospitals',
-      'shops', 'aid_centers', 'other_infrastructure', 'weather_related',
-      'floods', 'storm', 'fire', 'earthquake', 'cold', 'other_weather',
-      'direct_report'))
+     'water', 'food', 'shelter', 'clothing', 'money', 'missing_people',
+     'refugees', 'death', 'other_aid', 'infrastructure_related',
+     'transport', 'buildings', 'electricity', 'tools', 'hospitals',
+     'shops', 'aid_centers', 'other_infrastructure', 'weather_related',
+     'floods', 'storm', 'fire', 'earthquake', 'cold', 'other_weather',
+     'direct_report'))
 
 # Show dataframe
 agree = st.sidebar.checkbox('Select the checkbox if you want to see the entire dataset')
