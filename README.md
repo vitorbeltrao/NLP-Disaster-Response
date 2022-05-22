@@ -1,6 +1,6 @@
 # NLP - Disaster Response Pipeline Project
 
-![disaster_response_app](https://user-images.githubusercontent.com/78309658/169712031-42396e54-e899-4672-bda7-eae286963927.png)
+![Disaster_response_app](https://user-images.githubusercontent.com/78309658/169712089-d8262f8f-ffc8-4e0b-9919-04945871feab.png)
 
 ## Table of Contents
 
