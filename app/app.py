@@ -6,6 +6,8 @@ import joblib
 import streamlit as st
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.pool import StaticPool
 import re
 import string
 
@@ -52,9 +54,11 @@ def tokenize(text):
 
 
 # Load data
+engine = create_engine('sqlite:///disastersresponse.db', poolclass=StaticPool, connect_args={'check_same_thread': False})
 Base = declarative_base()
-engine = create_engine('sqlite:///disastersresponse.db')
 Base.metadata.create_all(engine)
+Session = sessionmaker(bind=engine)
+session = Session()
 df = pd.read_sql_query("SELECT * FROM labeledmessages", con=engine)
 
 # Small pre-processes before starting
