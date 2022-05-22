@@ -50,7 +50,7 @@ def tokenize(text):
 
 
 # Load data
-df = pd.read_csv('./labeledmessages.csv', low_memory=False)
+df = pd.read_csv('https://raw.githubusercontent.com/vitorbeltrao/NLP-Disaster-Response/master/app/labeledmessages.csv', low_memory=False)
 
 # Small pre-processes before starting
 # 1. passes label values '2' to '0' in target variable 'related'
